@@ -1,5 +1,16 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Fake server
+1. Installation
+```bash
+npm install -g json-server
+```
+
+2. Execution
+```bash
+json-server db.json --port 4000
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
