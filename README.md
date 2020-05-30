@@ -11,6 +11,16 @@ npm install -g json-server
 json-server db.json --port 4000
 ```
 
+## Redux
+Installation
+1. Execute the command below
+
+```bash
+npm install react-redux redux redux-thunk
+```
+
+2. Go to Chrome Web Store and install the `Redux DevTools` extension. In Firefox will also work.
+
 ## Available Scripts
 
 In the project directory, you can run:
