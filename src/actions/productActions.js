@@ -4,14 +4,17 @@ import {
 	ADD_PRODUCT_ERROR
 } from '../types'
 
+import axios from '../config/axios'
+
 // Create new products
 export function actionCreateNewProduct(product) {
-	return (dispatch) => {
+	return async dispatch => {
 		dispatch(addNewProduct());
 		try {
+			await axios.post('/products', product);
 			dispatch(addProductSucceed(product));
 		} catch (error) {
-			dispatch(addProductFailed(product));
+			dispatch(addProductFailed(true));
 		}
 	}
 }
@@ -29,6 +32,7 @@ const addProductSucceed = product => ({
 	payload: product
 })
 
-const addProductFailed = product => ({
+const addProductFailed = isError => ({
 	type: ADD_PRODUCT_ERROR,
+	payload: isError
 })
