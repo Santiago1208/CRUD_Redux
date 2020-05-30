@@ -1,22 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 
 // Redux actions
 import { actionCreateNewProduct } from '../actions/productActions'
 
 const NewProduct = () => {
+	// Declaring local state
+	const [name, setName] = useState('');
+	const [price, setPrice] = useState(0);
 
 	const dispatch = useDispatch();
 	
 	const submitNewProduct = event => {
 		event.preventDefault();
 		// Validate form
+		if (name.trim() === '' || price <= 0) {
+			// Show an error
+			return;
+		}
 
 		// Create new product
-		addProduct()
+		addProduct({
+			name,
+			price
+		})
 	}
 
-	const addProduct = () => dispatch(actionCreateNewProduct())
+	const addProduct = product => dispatch(actionCreateNewProduct(product))
 
 	return (
 		<div className="row justify-content-center">
@@ -27,11 +37,13 @@ const NewProduct = () => {
 						<form onSubmit={ submitNewProduct }>
 							<div className="form-group">
 								<label>Product Name</label>
-								<input type="text" className="form-control" placeholder="Product Name" name="name"></input>
+								<input type="text" className="form-control" placeholder="Product Name" name="name" value={ name } 
+									onChange={e => setName(e.target.value)}></input>
 							</div>
 							<div className="form-group">
 								<label>Product Price</label>
-								<input type="number" className="form-control" placeholder="Product Price" name="price"></input>
+								<input type="number" className="form-control" placeholder="Product Price" name="price" value={ price }
+									onChange={ e => setPrice(Number(e.target.value)) }></input>
 							</div>
 							<button type="submit" className="btn btn-primary font-weight-bold text-uppercase d-block w-100">Add</button>
 						</form>
