@@ -11,7 +11,7 @@ export function actionCreateNewProduct(product) {
 	return async dispatch => {
 		dispatch(addNewProduct());
 		try {
-			await axios.post('/products', product);
+			await axios.post('/hi', product);
 			dispatch(addProductSucceed(product));
 		} catch (error) {
 			dispatch(addProductFailed(true));

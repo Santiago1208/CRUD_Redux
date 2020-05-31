@@ -10,6 +10,10 @@ const NewProduct = () => {
 	const [price, setPrice] = useState(0);
 
 	const dispatch = useDispatch();
+
+	// Accessing the global state
+	const loading = useSelector(state => state.products.loading)
+	const error = useSelector(state => state.products.error)
 	
 	const submitNewProduct = event => {
 		event.preventDefault();
@@ -47,6 +51,8 @@ const NewProduct = () => {
 							</div>
 							<button type="submit" className="btn btn-primary font-weight-bold text-uppercase d-block w-100">Add</button>
 						</form>
+						{ loading === true ? <p>Loading...</p> :  null }
+						{ error === true ? <p className="alert alert-danger p2 mt-4 text-center">There was an error</p> : null }
 					</div>
 				</div>
 			</div>
