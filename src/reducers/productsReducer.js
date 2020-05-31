@@ -1,7 +1,10 @@
 import {
 	ADD_PRODUCT,
 	ADD_PRODUCT_SUCCESS,
-	ADD_PRODUCT_ERROR
+	ADD_PRODUCT_ERROR,
+	GET_PRODUCTS_START,
+	GET_PRODUCTS_SUCCESS,
+	GET_PRODUCTS_ERROR
 } from '../types'
 
 // Each reducer has its state
@@ -30,6 +33,23 @@ export default function (state = initialState, action) {
 				...state,
 				loading: false,
 				error: action.payload
+			}
+		case GET_PRODUCTS_START:
+			return {
+				...state,
+				loading: true
+			}
+		case GET_PRODUCTS_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				products: [...action.payload]
+			}
+		case GET_PRODUCTS_ERROR:
+			return {
+				...state,
+				loading: false,
+				error: true
 			}
 		default:
 			return state

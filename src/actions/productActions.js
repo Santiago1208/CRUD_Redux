@@ -1,7 +1,10 @@
 import {
 	ADD_PRODUCT,
 	ADD_PRODUCT_SUCCESS,
-	ADD_PRODUCT_ERROR
+	ADD_PRODUCT_ERROR,
+	GET_PRODUCTS_START,
+	GET_PRODUCTS_SUCCESS,
+	GET_PRODUCTS_ERROR
 } from '../types'
 
 import axios from '../config/axios'
@@ -17,7 +20,7 @@ export function actionCreateNewProduct(product) {
 			Swal.fire('Success', 'The product was created successfully', 'success');
 		} catch (error) {
 			dispatch(addProductFailed(true));
-			Swal.fire('Failed', 'An error occurred while creating the product', 'error');
+			Swal.fire('Failed', 'An error occured while creating the product', 'error');
 		}
 	}
 }
@@ -39,3 +42,16 @@ const addProductFailed = isError => ({
 	type: ADD_PRODUCT_ERROR,
 	payload: isError
 })
+
+export function actionGetProducts() {
+	return async dispatch => {
+		dispatch({type: GET_PRODUCTS_START})
+		try {
+			const products = await axios.get('/products');
+			dispatch({type: GET_PRODUCTS_SUCCESS, payload: products.data});
+		} catch (error) {
+			dispatch({type: GET_PRODUCTS_ERROR})
+			Swal.fire('Error', 'An error occured while fetching the products', 'error');
+		}
+	}
+}
