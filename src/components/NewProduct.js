@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 // Redux actions
 import { actionCreateNewProduct } from '../actions/productActions'
 
-const NewProduct = () => {
+const NewProduct = ({history}) => {
 	// Declaring local state
 	const [name, setName] = useState('');
 	const [price, setPrice] = useState(0);
@@ -28,6 +28,8 @@ const NewProduct = () => {
 			name,
 			price
 		})
+
+		history.push('/')
 	}
 
 	const addProduct = product => dispatch(actionCreateNewProduct(product))

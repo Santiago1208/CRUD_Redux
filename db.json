@@ -29,6 +29,16 @@
       "name": "Rib eye",
       "price": 400,
       "id": 6
+    },
+    {
+      "name": "Rib eye",
+      "price": 4000,
+      "id": 7
+    },
+    {
+      "name": "rib eye",
+      "price": 500,
+      "id": 8
     }
   ]
 }

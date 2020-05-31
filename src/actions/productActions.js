@@ -5,16 +5,19 @@ import {
 } from '../types'
 
 import axios from '../config/axios'
+import Swal from 'sweetalert2'
 
 // Create new products
 export function actionCreateNewProduct(product) {
 	return async dispatch => {
 		dispatch(addNewProduct());
 		try {
-			await axios.post('/hi', product);
+			await axios.post('/products', product);
 			dispatch(addProductSucceed(product));
+			Swal.fire('Success', 'The product was created successfully', 'success');
 		} catch (error) {
 			dispatch(addProductFailed(true));
+			Swal.fire('Failed', 'An error occurred while creating the product', 'error');
 		}
 	}
 }
